@@ -1,0 +1,331 @@
+:root {
+    --ff-primary: 'Roboto', arial, sans-serif;
+    --ff-accent: 'Poppins', 'Atkinson Hyperlegible';
+    --ff-code: 'JetBrains Mono', 'Inconsolata', 'Roboto Mono';
+
+    --fs-heading-1: 2.5rem;
+    --fs-heading-2: 1.6rem;
+    --fs-heading-3: 1.45rem;
+    --fs-heading-4: 1.3rem;
+    --fs-body-1: 1.15rem;
+    --fs-body-2: 0.8rem;
+
+    --accent: orange;
+    --background: white;
+
+    --actions-bg: hsl(0, 0%, 93%);
+    --actions-bg--hover: hsl(0, 0%, 85%);
+}
+
+body {
+    font-family: var(--ff-primary);
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    font-family: var(--ff-accent);
+    font-size: var(--fs-heading-1);
+    letter-spacing: -0.025em;
+    font-weight: 700;
+}
+
+h2 {
+    font-size: var(--fs-heading-4);
+    font-weight: 400;
+}
+
+p {
+    font-family: var(--ff-primary);
+}
+
+button {
+    cursor: pointer;
+    border: 0;
+    background: none;
+}
+
+mark {
+    background-color: var(--highlight, orange);
+}
+
+.notes-app {
+    display: grid;
+    grid-template-areas: "header"
+                         "body"
+                         "add-note"
+                         "footer";
+    
+    width: min(100vw, 75rem);
+    margin: 1.25rem auto 0;
+
+    @media screen and (min-width: 40rem) {
+        padding-inline: 1.5rem;
+    }
+}
+
+.header {
+    grid: "header";
+    display: flex;
+    flex-flow: row;
+    align-items: baseline;
+    justify-content: space-between;
+
+    &__name {
+        line-height: 1;
+
+        &__me {
+            font-style: italic;
+            font-weight: 700;
+            font-size: var(--fs-heading-3);
+        }
+
+        & a:any-link {
+            color: inherit;
+            text-decoration: inherit;
+        }
+    }
+
+    &__nav {
+        flex: 1 0 30%;
+        display: flex;
+        justify-content: flex-end;
+        position: relative;
+        margin: 0 1em;
+
+        &__open {
+            width: 2em;
+
+            & img {
+                width: 100%;
+            }
+        }
+
+        &__list {
+            display: flex;
+            visibility: hidden;
+            position: absolute;
+            top: 0;
+            right: 0;
+            flex-flow: column;
+            &__item {
+                display: inline-block;
+                width: max-content;
+                font-weight: 500;
+                a {
+                    text-decoration: none;
+                    color: inherit;
+                }
+            }
+
+            &--show {
+                visibility: visible;
+            }
+        }
+
+        @media screen and (min-width: 40rem) {
+            &__list {
+                flex-flow: row wrap;
+                width: 100%;
+                gap: 1rem;
+                justify-content: space-around;
+                visibility: visible;
+            }
+
+            &__open {
+                display: none;
+            }
+        }
+    }
+}
+
+.notes {
+    margin: 2rem auto;
+    grid: "body";
+    width: 100%;
+
+    &__search {
+        display: flex;
+        flex-flow: row wrap;
+        height: max-content;
+        max-width: 100%;
+        gap: 1rem;
+        margin-bottom: 1rem;
+        justify-content: space-around;
+        
+        &__icon {
+            height: 1.5em;
+        }
+        &__bar {
+            border: 0;
+            flex-grow: 5;
+            flex-shrink: 1;
+            font-size: var(--fs-body-1);
+        }
+        &__sort {
+            width: max-content;
+            background: inherit;
+            border: none;
+            font-family: var(--ff-primary);
+            font-size: var(--fs-body-1);
+            & > option {
+                background: var(--actions-bg);
+
+                &:hover, &:active, &:focus {
+                    background: var(--actions-bg--hover);
+                }
+            }
+            &:hover, &:active, &:focus {
+                background: var(--actions-bg);
+            }
+        }
+    }
+    &__list {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(min(17.5rem, 70%), 1fr));
+        gap: 2rem;
+
+        &:empty{
+            grid-template-columns: minmax(min(17.5rem, 70%), 1fr);
+            justify-items: center;
+            &::after {
+                content: attr(data-empty);
+                font-size: var(--fs-heading-2);
+            }
+        }
+    }
+}
+
+.note {
+    height: max-content;
+    position: relative;
+    border-radius: 0.2em;
+    border: 0.1em solid black;
+    padding: 0.5rem 0.75rem;
+
+    header {
+        height: 100%;
+        width: 100%;
+        font-family: var(--ff-accent);
+        font-size: var(--fs-heading-2);
+        display: flex;
+        flex-direction: row;
+        gap: 2rem;
+
+        justify-content: space-between;
+        align-items: baseline;
+    
+        margin-bottom: 0.5rem;
+    }
+
+    &__title {
+        font-family: inherit;
+        font-size: var(--fs-heading-2);
+        font-weight: 600;
+        line-height: 1.15;
+        width: 100%;
+    }
+
+    &__action {
+        font-family: var(--ff-primary);
+        font-size: var(--fs-body-1);
+        line-height: 1;
+        place-self: flex-start;
+    }
+
+    &__actions {
+        display: flex;
+        visibility: hidden;
+        flex-direction: column;
+        position: absolute;
+        border-radius: 0.2em;
+        margin: 0.75rem;
+        gap: 0.1rem;
+        background-color: var(--actions-bg);
+        
+        top: 0%;
+        right: 0%;
+        line-height: 1;
+        
+        &--show {
+            visibility: visible;
+        }
+        
+        & li {
+            display: inherit;
+            &:first-child {
+                border-radius: 0.2em 0.2em 0 0;
+            }
+            &:last-child {
+                border-radius: 0 0 0.2em 0.2em;
+            }
+        }
+        
+        &__option {
+            padding: 0.4em 1.25em;
+            font-size: var(--fs-body-2);
+            font-family: var(--ff-primary);
+            font-weight: 500;
+            width: 100%;
+            text-align: left;
+            border-radius: inherit;
+
+            &:hover, &:active, &:focus {
+                background-color: var(--actions-bg--hover);
+            }
+        }
+    }
+
+    &__body {
+        font-family: inherit;
+        font-size: var(--fs-body-1);
+    }
+
+    &__last-edit {
+        font-size: var(--fs-body-2);
+        color: grey;
+        font-style: italic;
+    }
+}
+
+.add-note {
+    margin: 2rem auto;
+    grid: "add-note";
+    width: min(25rem, 100%);
+}
+
+.editable {
+    cursor:text;
+    &:empty::before {
+        content: attr(data-placeholder);
+        color: grey;
+    }
+}
+
+.input {
+    &__title {
+        border: 0;
+    }
+    &__body {
+        width: 100%;
+        height: 7em;
+        resize: none;
+        border: 0;
+    }
+}
+
+.footer {
+    font-style: italic;
+    font-size: var(--fs-body-2);
+    color: grey;
+}
+
+.text-area-test {
+    width: 20rem;
+    height: min-content;
+    resize: none;
+}

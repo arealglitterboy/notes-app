@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notes</title>
+    <link rel="shortcut icon" href="images/favicon-2.svg" type="image/x-icon">
+</head>
+<body>
+    <div class="notes-app">
+        <header class="header">
+            <div class="header__name">
+                <h1><a href="./">Notes</a></h1>
+                <h2>By <span class="header__name__me">Ben Brown</span></h2>
+            </div>
+            <nav class="header__nav">
+                <button class="header__nav__open" id="header__nav__open"><img src="images/menu.svg" alt="hamburger menu icon"></button>
+                <ul class="header__nav__list" id="header__nav__list">
+                    <li class="header__nav__list__item"><a href="">Portfolio</a></li>
+                    <li class="header__nav__list__item"><a href="">About Me</a></li>
+                    <li class="header__nav__list__item"><a href="">Other Projects</a></li>
+                    <li class="header__nav__list__item"><a href="">Navigation</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main class="notes">
+            <section class="notes__search">
+                <label for="search">
+                    <img class="notes__search__icon" src="images/search.svg" alt="">
+                </label>
+                <input class="notes__search__bar" type="text" id="search">
+                <select class="notes__search__sort" id="sort">
+                    <option value="newest">Newest First</option>
+                    <option value="oldest">Oldest First</option>
+                    <option value="alpha-desc">Alphabetical A-Z</option>
+                    <option value="alpha-asc">Alphabetical Z-A</option>
+                </select>
+            </section>
+            
+            <section id="notes-list" class="notes__list" data-empty="Gee, it's lonely in here :("></section>
+        </main>
+        
+        <form action="" id="add-note" class="add-note">
+            <div class="note">
+                <header>
+                    <div tabindex="1" id="add-note__title" class="note__title input__title editable" data-placeholder="What's happening with you?" contenteditable=""></div>
+                    <!-- <input type="text" tabindex="1" id="add-note__title" class="note__title input__title" placeholder="What's happening with you?"> -->
+                    <button tabindex="3" id="add-note__action" class="note__action">+</button>
+                </header>
+                <div>
+                    <textarea tabindex="2" id="add-note__body" cols="40" rows="10" class="input__body note__body" placeholder="Tell me how you feel, really dig deep!"></textarea>
+                </div>
+            </div>
+        </form>
+
+        <footer class="footer">
+            <p>Created by Ben Brown</p>
+            <p>Existentialism Inc. 2021</p>
+        </footer>
+    </div>
+
+    <template id="note-template">
+        <article class="note">
+            <header>
+                <h4 class="note__title"></h4>
+                <button class="note__action"></button>
+                <ul class="note__actions">
+                    <li><button class="note__actions__option remove">Remove</button></li>
+                    <li><button class="note__actions__option edit">Edit</button></li>
+                </ul>
+            </header>
+            <div>
+                <p class="note__body"></p>
+                <p><time class="note__last-edit"></time></p>
+            </div>
+        </article>
+    </template>
+
+    <script src="scripts/index-bundle.js"></script>
+</body>
+</html>

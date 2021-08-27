@@ -1,0 +1,257 @@
+:root {
+  --ff-primary: "Roboto", arial, sans-serif;
+  --ff-accent: "Atkinson Hyperlegible";
+  --ff-code: "JetBrains Mono", "Inconsolata", "Roboto Mono";
+  --fs-h1: 4.5rem;
+  --fs-h2: 2rem;
+  --fs-body-1: 1.5rem;
+  --fs-body-2: 1rem;
+  --fs-button-1: 2.2rem;
+  --fs-button-2: 1.5rem;
+  --accent: #3d62da;
+  --error: #DA503D;
+  --highlight: #A9FFCB;
+  --primary-dark-1: #1a1918;
+  --primary-dark-2: #31302f;
+  --primary-light-1: #adadad;
+  --background: #F2F3FA;
+  --body-width: min(50rem, 90vw);
+}
+
+body {
+  background-color: var(--background);
+  font-family: var(--ff-primary);
+  color: var(--primary-dark-1);
+  padding: 1rem 2rem;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  font-family: var(--ff-accent);
+  font-size: var(--fs-h1);
+  letter-spacing: -0.025em;
+  font-weight: 700;
+}
+
+p {
+  font-family: var(--ff-primary);
+}
+
+button {
+  cursor: pointer;
+  border: 0;
+  background: none;
+}
+
+mark {
+  background-color: var(--highlight);
+}
+
+.anchor-button {
+  display: inline-grid;
+  font-family: var(--ff-primary);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  font-size: var(--fs-button-1);
+  border-radius: 0.25em;
+  background-color: var(--accent);
+  color: var(--background);
+  place-content: center;
+  text-decoration: none;
+  padding: 0.25em 0.5em;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  place-content: center;
+  margin: 0 auto;
+  width: min(70vw, 50rem);
+}
+.body__header {
+  display: flex;
+  flex-direction: column;
+  place-items: flex-start;
+  width: 100%;
+  margin: 1rem auto;
+}
+.body__header__config {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.note {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  background: white;
+  margin-bottom: 1.25rem;
+}
+.note__header {
+  padding: 0.25rem 1rem;
+  margin-bottom: 0.25rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: inherit;
+  color: inherit;
+}
+.note__header__title {
+  font-size: var(--fs-body-1);
+  font-weight: 600;
+}
+.note__header__title a {
+  color: inherit;
+  text-decoration: none;
+}
+.note__header__remove {
+  color: inherit;
+  font-weight: 600;
+  font-family: var(--ff-primary);
+  font-size: var(--fs-body-2);
+}
+.note__header--red {
+  background: red;
+  color: white;
+}
+.note__header--blue {
+  background: blue;
+  color: white;
+}
+.note__header--green {
+  background: greenyellow;
+  color: white;
+}
+.note__header--yellow {
+  background: yellow;
+  color: var(--primary-dark-2);
+}
+.note__header--purple {
+  background: purple;
+  color: white;
+}
+.note__body {
+  font-size: var(--fs-body-2);
+  padding: 0 1rem 0.5rem;
+}
+.note__remove {
+  position: absolute;
+  align-self: flex-end;
+  border: none;
+  background: none;
+  font-weight: 600;
+  font-family: var(--ff-primary);
+  font-size: var(--fs-body-2);
+  color: var(--primary-light-1);
+}
+
+.add-note, .edit-note {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding: 0.5rem 1rem;
+  width: 100%;
+  background: white;
+  margin-bottom: 1.25rem;
+}
+.add-note__title, .edit-note__title {
+  font-size: var(--fs-body-1);
+  font-weight: 600;
+}
+.add-note__title a, .edit-note__title a {
+  color: var(--primary-dark-2);
+  text-decoration: none;
+}
+.add-note__body, .edit-note__body {
+  font-size: var(--fs-body-2);
+}
+.add-note__button, .edit-note__button {
+  font-family: var(--ff-accent);
+  border-radius: 0.25em;
+  font-size: var(--fs-body-2);
+  place-self: flex-end;
+  background: var(--primary-dark-1);
+  color: white;
+  padding: 0.25em 1.5em;
+}
+.add-note__button:hover, .edit-note__button:hover {
+  background: var(--primary-dark-2);
+}
+.add-note__error, .edit-note__error {
+  display: flex;
+  flex-direction: row;
+  font-size: var(--fs-body-2);
+  background-color: var(--error);
+  color: white;
+  padding: 0.5rem 1rem;
+  width: 100%;
+  line-height: 1.1;
+  align-items: baseline;
+  border-radius: 0.25rem;
+}
+.add-note__error--no-error, .edit-note__error--no-error {
+  display: none;
+}
+.add-note__error__icon, .edit-note__error__icon {
+  content: "!";
+  display: inline-grid;
+  place-content: center;
+  width: 1.2rem;
+  height: 1.2rem;
+  font-weight: 800;
+  background-color: white;
+  color: var(--error);
+  border-radius: 100%;
+  margin: 0 0.25rem;
+}
+.add-note__error__message, .edit-note__error__message {
+  padding: 0;
+  margin: 0;
+  height: max-content;
+}
+
+.no-notes {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding: 1.5rem 1rem;
+  place-items: center;
+  width: 100%;
+  background: white;
+  margin-bottom: 1.25rem;
+}
+.no-notes__text {
+  font-size: var(--fs-h2);
+  font-family: var(--ff-code);
+  font-weight: 600;
+  line-height: 1;
+  color: var(--primary-light-1);
+}
+
+.editable {
+  position: relative;
+  width: 100%;
+}
+.editable__element--click-through {
+  position: absolute;
+  top: 0;
+  pointer-events: none;
+  color: var(--primary-light-1);
+}
+
+@media screen and (min-width: 70rem) {
+  :root {
+    --fs-h1: 4rem;
+    --fs-body-1: 2.25rem;
+    --fs-body-2: 1.15rem;
+  }
+}
